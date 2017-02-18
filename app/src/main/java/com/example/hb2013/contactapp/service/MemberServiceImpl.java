@@ -21,6 +21,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void add(MemberBean bean) {
+        dao.add(bean);
 
 
     }
@@ -47,7 +48,8 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public ArrayList<MemberBean> list() {
-        return null;
+
+        return dao.selectAll();
     }
 
     @Override
@@ -57,6 +59,7 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public void delete(MemberBean bean) {
+        dao.delete(bean);
 
     }
 }

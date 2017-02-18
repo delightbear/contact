@@ -1,5 +1,6 @@
 package com.example.hb2013.contactapp.presentation;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -41,8 +42,16 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btSubmit:
+                member.setId(etID.getText().toString());
+                member.setPass(etPass.getText().toString());
+                member.setName(etName.getText().toString());
+                member.setPhone(etPhone.getText().toString());
                 member.setAddr(etAddr.getText().toString());
-                service.add(new MemberBean());
+
+                service.add(member);
+                Intent intent = new Intent(SignupActivity.this, SigninActivity.class);
+                startActivity(intent);
+
                 break;
             case R.id.btCancel:
 

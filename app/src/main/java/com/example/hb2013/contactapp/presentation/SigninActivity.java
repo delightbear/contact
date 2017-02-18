@@ -3,6 +3,7 @@ package com.example.hb2013.contactapp.presentation;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,6 +45,7 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
                 member.setId(id);
                 member.setPass(pass);
                 if(service.login(member)) { //true를 리턴하면
+                    Log.d("로그인:","성공");
                     startActivity(new Intent(SigninActivity.this, ListActivity.class)); //리스트화면으로
                 }else{
                     Toast.makeText(SigninActivity.this,"로그인실패",Toast.LENGTH_LONG).show();

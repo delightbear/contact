@@ -13,12 +13,13 @@ import java.util.ArrayList;
 /**
  * Created by hb2013 on 2017-02-11.
  */
+
 //String sql은 sql을 위해 만든 string이기 때문에 쿼리문이 들어가는 부분에선
 //미리 String sql = String.format("%S","");을 적어놓고 나중에 채워놓는 것도 한 방법이다.
 
 public class MemberDAO extends SQLiteOpenHelper{
     public MemberDAO(Context context) {
-        super(context, "hanbit2.db", null, 1);
+        super(context, "testtest.db", null, 1);
         this.getWritableDatabase();
         // "" 은 DB의 주소값을 갖게 됨. null 내가 만든거로 쓰겠다? 1은 버젼이라고 생각하면 됨.
 
@@ -29,15 +30,15 @@ public class MemberDAO extends SQLiteOpenHelper{
     //id,pass,name,phone,addr,profile
     @Override
     public void onCreate(SQLiteDatabase db) { // 테이블 생성 쿼리문 넣을 곳
-        String sql="CREATE TABLE IF NOT EXISTS Member\n" +
+        String sql=String.format("%s","CREATE TABLE IF NOT EXISTS Member\n" +
                 "(\n" +
-                " id text(20) PRIMARY KEY,\n" + // PRIMARY KEY 중복허용하지않음.
-                " pass text(20),\n" +
-                " name text(20),\n" +
-                " email text(20),\n" +
-                " phone text(20),\n" + //하이픈까지 합쳐서 13글자
-                " addr text(20),\n" +
-                " profile text(20));";
+                "id text(20) PRIMARY KEY,\n" +
+                "pass text(20),\n" +
+                "name text(20),\n" +
+                "email text(20),\n" +
+                "phone text(20),\n" +
+                "addr text(20),\n" +
+                "profile text(20));");
         db.execSQL(sql);
         db.execSQL("CREATE TABLE IF NOT EXISTS Message(\n" +
                 "  \t_id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
@@ -50,17 +51,17 @@ public class MemberDAO extends SQLiteOpenHelper{
                 ");\n");
 /*
         db.execSQL("INSERT INTO Member(id,pass,name,email,phone,profile,addr)\n" +
-                "VALUES('hong','1','홍길동','hong@test.com','010-1234-5678','default','서울');");
+                "VALUES('hong','1','홍길동','hong@test.com','010-1234-5678','default_profile','서울');");
         db.execSQL("INSERT INTO Member(id,pass,name,email,phone,profile,addr)\n" +
-                "VALUES('kim','1','김유신','kim@test.com','010-1234-5678','default','서울');");
+                "VALUES('kim','1','김유신','kim@test.com','010-1234-5678','default_profile','서울');");
         db.execSQL("INSERT INTO Member(id,pass,name,email,phone,profile,addr)\n" +
-                "VALUES('lee','1','이순신','lee@test.com','010-1234-5678','default','서울');");
+                "VALUES('lee','1','이순신','lee@test.com','010-1234-5678','default_profile','서울');");
         db.execSQL("INSERT INTO Member(id,pass,name,email,phone,profile,addr)\n" +
-                "VALUES('park','1','박지성','park@test.com','010-1234-5678','default','부산');");
+                "VALUES('park','1','박지성','park@test.com','010-1234-5678','default_profile','부산');");
         db.execSQL("INSERT INTO Member(id,pass,name,email,phone,profile,addr)\n" +
-                "VALUES('yoo','1','유비','yoo@test.com','010-1234-5678','default','인천');");
-
+                "VALUES('yoo','1','유비','yoo@test.com','010-1234-5678','default_profile','인천');");
 */
+
     }
 
     @Override
@@ -72,10 +73,14 @@ public class MemberDAO extends SQLiteOpenHelper{
     //CREATE
     public void add(MemberBean bean){
         String sql=String.format("INSERT INTO Member " +
-                "(id,pass,name,phone,addr,profile) VALUES " +
+                "(id,pass,name,email,phone,profile,addr) VALUES " +
                 "('%s','%s','%s','%s','%s','%s');",
-                bean.getId(),bean.getPass(),bean.getName(),bean.getPhone()
-                ,bean.getAddr(),bean.getProfile());
+                bean.getId(),bean.getPass(),bean.getName(), bean.getEmail(), bean.getPhone()
+                ,bean.getProfile(),bean.getAddr());
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL(sql);
+        db.close();
 
 
     }
@@ -117,13 +122,31 @@ public class MemberDAO extends SQLiteOpenHelper{
         String sql=String.format("SELECT id,pass,name,phone,addr,profile " +
                 "FROM Member WHERE name = '%s'",keyword);
         ; //싱글쿼터(') 주의
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(sql,null);
+        if(cursor !=null){
+            Log.d("Member ","Exit !!");
+            cursor.moveToFirst();
+        }
+        do{
+            MemberBean member = new MemberBean();
+            member.setId(cursor.getString(0));
+            member.setPass(cursor.getString(1));
+            member.setName(cursor.getString(2));
+            member.setEmail(cursor.getString(3));
+            member.setPhone(cursor.getString(4));
+            member.setProfile(cursor.getString(5));
+            member.setAddr(cursor.getString(6));
+            list.add(member);
+        }while(cursor.moveToNext());
+        Log.d("Member Count: ",String.valueOf(list.size()));
         return list;
     }
 
     //READ ALL
     public ArrayList<MemberBean> selectAll(){
         ArrayList<MemberBean> list = new ArrayList<MemberBean>();
-        String sql="SELECT id,pass,name,phone,addr,profile\n" +
+        String sql="SELECT id,pass,name,email,phone,profile,addr\n" +
                 " FROM Member;";
                 //컬럼부분 = 읽어올 데이터 분류? 스키마?
                 //테이블 부분 = 클래스가 됨?
@@ -158,12 +181,20 @@ public class MemberDAO extends SQLiteOpenHelper{
                 bean.getPass(), bean.getPhone(), bean.getAddr(), bean.getProfile(),
                 bean.getId());
 
+        SQLiteDatabase db= this.getWritableDatabase();
+        db.execSQL(sql);
+        db.close();
+
     }
 
     //DELETE
     public void delete(MemberBean bean){
     String sql = String.format("DELETE FROM Member " +
             "WHERE id='%s'; ", bean.getId());
+
+        SQLiteDatabase db= this.getWritableDatabase();
+        db.execSQL(sql);
+        db.close();
 
     }
 
