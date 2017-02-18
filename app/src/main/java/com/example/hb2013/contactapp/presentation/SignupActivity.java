@@ -13,7 +13,7 @@ import com.example.hb2013.contactapp.service.MemberService;
 import com.example.hb2013.contactapp.service.MemberServiceImpl;
 
 public class SignupActivity extends AppCompatActivity implements View.OnClickListener {
-    EditText etID, etPass, etName, etPhone, etAddr;
+    EditText etID, etPass, etName, etPhone, etAddr,etEmail;
     Button btSubmit, btCancel;
     MemberService service;
     MemberBean member;
@@ -28,7 +28,9 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         etPass= (EditText) findViewById(R.id.etPass);
         etName= (EditText) findViewById(R.id.etName);
         etPhone= (EditText) findViewById(R.id.etPhone);
+        etEmail= (EditText) findViewById(R.id.etEmail);
         etAddr =(EditText) findViewById(R.id.etAddr);
+
         btSubmit= (Button) findViewById(R.id.btSubmit);
         btCancel= (Button) findViewById(R.id.btCancel);
 
@@ -45,10 +47,13 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 member.setId(etID.getText().toString());
                 member.setPass(etPass.getText().toString());
                 member.setName(etName.getText().toString());
+                member.setEmail(etEmail.getText().toString());
                 member.setPhone(etPhone.getText().toString());
                 member.setAddr(etAddr.getText().toString());
+                member.setProfile("");
 
                 service.add(member);
+
                 Intent intent = new Intent(SignupActivity.this, SigninActivity.class);
                 startActivity(intent);
 

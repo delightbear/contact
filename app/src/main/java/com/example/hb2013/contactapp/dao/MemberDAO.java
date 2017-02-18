@@ -74,7 +74,7 @@ public class MemberDAO extends SQLiteOpenHelper{
     public void add(MemberBean bean){
         String sql=String.format("INSERT INTO Member " +
                 "(id,pass,name,email,phone,profile,addr) VALUES " +
-                "('%s','%s','%s','%s','%s','%s');",
+                "('%s','%s','%s','%s','%s','%s','%s');",
                 bean.getId(),bean.getPass(),bean.getName(), bean.getEmail(), bean.getPhone()
                 ,bean.getProfile(),bean.getAddr());
 
