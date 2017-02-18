@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.hb2013.contactapp.R;
 import com.example.hb2013.contactapp.domain.MemberBean;
@@ -42,14 +43,12 @@ public class SigninActivity extends AppCompatActivity implements View.OnClickLis
                 String pass=etPass.getText().toString();
                 member.setId(id);
                 member.setPass(pass);
-                MemberBean result= service.findOne(member);
-
-                if(id.equals("") && pass.equals(result.getPass())){
-                    startActivity(new Intent(SigninActivity.this, ListActivity.class));
-            }else{
-                    startActivity(new Intent(SigninActivity.this, SigninActivity.class));
+                if(service.login(member)) { //true를 리턴하면
+                    startActivity(new Intent(SigninActivity.this, ListActivity.class)); //리스트화면으로
+                }else{
+                    Toast.makeText(SigninActivity.this,"로그인실패",Toast.LENGTH_LONG).show();
+                    //startActivity(new Intent(SigninActivity.this, SigninActivity.class));//다시 로그인화면
                 }
-
 
                 //Intent i = new Intent(SigninActivity.this, DetailActivity.class);
                 //startActivity(i);

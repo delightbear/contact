@@ -14,6 +14,7 @@ public interface MemberService {
 
     //READ ONE
     public MemberBean findOne(MemberBean bean); // 비번이 있어서 보안하는 것임
+    public boolean login(MemberBean bean);
 
     //READ SOME
     public ArrayList<MemberBean> findSome(String keyword);

@@ -127,7 +127,24 @@ public class MemberDAO extends SQLiteOpenHelper{
                 " FROM Member;";
                 //컬럼부분 = 읽어올 데이터 분류? 스키마?
                 //테이블 부분 = 클래스가 됨?
-
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(sql,null);
+        if(cursor !=null){
+            Log.d("Member ","Exit !!");
+            cursor.moveToFirst();
+        }
+        do{
+            MemberBean member = new MemberBean();
+            member.setId(cursor.getString(0));
+            member.setPass(cursor.getString(1));
+            member.setName(cursor.getString(2));
+            member.setEmail(cursor.getString(3));
+            member.setPhone(cursor.getString(4));
+            member.setProfile(cursor.getString(5));
+            member.setAddr(cursor.getString(6));
+            list.add(member);
+        }while(cursor.moveToNext());
+        Log.d("Member Count: ",String.valueOf(list.size()));
         return list;
 
     }
