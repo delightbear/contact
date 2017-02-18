@@ -5,11 +5,17 @@ package com.example.hb2013.contactapp.domain;
  */
 
 public class MemberBean {
-    private String id;
-    private String pass;
-    private String name;
+    private String id,pass,name,email,phone,profile,addr;
 
-    public String getId() {  //get은 모두 리턴타입이다.  bean으로 싸서
+    public String getAddr() {
+        return addr;
+    }
+
+    public void setAddr(String addr) {
+        this.addr = addr;
+    }
+
+    public String getId() {
         return id;
     }
 
@@ -33,20 +39,20 @@ public class MemberBean {
         this.name = name;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getPhone() {
         return phone;
     }
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public String getAddr() {
-        return addr;
-    }
-
-    public void setAddr(String addr) {
-        this.addr = addr;
     }
 
     public String getProfile() {
@@ -57,9 +63,7 @@ public class MemberBean {
         this.profile = profile;
     }
 
-    private String phone;
-    private String addr;
-    private String profile;
+
 
 
 

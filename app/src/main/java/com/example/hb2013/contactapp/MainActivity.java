@@ -9,9 +9,12 @@ import android.widget.Toast;
 
 import com.example.hb2013.contactapp.presentation.SigninActivity;
 import com.example.hb2013.contactapp.presentation.SignupActivity;
+import com.example.hb2013.contactapp.service.MemberService;
+import com.example.hb2013.contactapp.service.MemberServiceImpl;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     Button btSignUp, btSignIn;
+    MemberService service;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btSignIn=(Button) findViewById(R.id.btSignIn);
         btSignIn.setOnClickListener(this);
         btSignUp.setOnClickListener(this);
+        service = new MemberServiceImpl(this.getApplicationContext());
     }
 
     @Override

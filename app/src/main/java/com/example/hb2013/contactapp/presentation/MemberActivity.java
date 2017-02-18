@@ -24,7 +24,7 @@ public class MemberActivity extends AppCompatActivity implements View.OnClickLis
         btList=(Button) findViewById(R.id.btList);
         btUpdate=(Button) findViewById(R.id.btUpdate);
         btDelete=(Button) findViewById(R.id.btDelete);
-        service = new MemberServiceImpl();
+        service = new MemberServiceImpl(this.getApplicationContext());
         member = new MemberBean();
 
         btAdd.setOnClickListener(this);

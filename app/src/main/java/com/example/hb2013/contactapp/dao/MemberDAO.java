@@ -1,8 +1,10 @@
 package com.example.hb2013.contactapp.dao;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.example.hb2013.contactapp.domain.MemberBean;
 
@@ -15,22 +17,50 @@ import java.util.ArrayList;
 //미리 String sql = String.format("%S","");을 적어놓고 나중에 채워놓는 것도 한 방법이다.
 
 public class MemberDAO extends SQLiteOpenHelper{
-    public MemberDAO(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, "", null, 1);
+    public MemberDAO(Context context) {
+        super(context, "hanbit2.db", null, 1);
+        this.getWritableDatabase();
+        // "" 은 DB의 주소값을 갖게 됨. null 내가 만든거로 쓰겠다? 1은 버젼이라고 생각하면 됨.
 
     }
+
+
+
     //id,pass,name,phone,addr,profile
     @Override
     public void onCreate(SQLiteDatabase db) { // 테이블 생성 쿼리문 넣을 곳
-        String sql=String.format("%s","CREATE TABLE Member\n" +
+        String sql="CREATE TABLE IF NOT EXISTS Member\n" +
                 "(\n" +
-                " id text(10) PRIMARY KEY,\n" + // PRIMARY KEY 중복허용하지않음.
-                " pass text(10),\n" +
-                " name text(10),\n" +
-                " phone text(13),\n" + //하이픈까지 합쳐서 13글자
-                " addr text(10),\n" +
-                " profile text(10));");
+                " id text(20) PRIMARY KEY,\n" + // PRIMARY KEY 중복허용하지않음.
+                " pass text(20),\n" +
+                " name text(20),\n" +
+                " email text(20),\n" +
+                " phone text(20),\n" + //하이픈까지 합쳐서 13글자
+                " addr text(20),\n" +
+                " profile text(20));";
+        db.execSQL(sql);
+        db.execSQL("CREATE TABLE IF NOT EXISTS Message(\n" +
+                "  \t_id INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
+                "    sender TEXT(20),\n" +
+                "    receiver TEXT(20),\n" +
+                "    content TEXT(20),\n" +
+                "    writeTime TEXT(20),\n" +
+                "    id TEXT,\n" +
+                "    FOREIGN KEY(id) REFERENCES Member(id)\n" +
+                ");\n");
+/*
+        db.execSQL("INSERT INTO Member(id,pass,name,email,phone,profile,addr)\n" +
+                "VALUES('hong','1','홍길동','hong@test.com','010-1234-5678','default','서울');");
+        db.execSQL("INSERT INTO Member(id,pass,name,email,phone,profile,addr)\n" +
+                "VALUES('kim','1','김유신','kim@test.com','010-1234-5678','default','서울');");
+        db.execSQL("INSERT INTO Member(id,pass,name,email,phone,profile,addr)\n" +
+                "VALUES('lee','1','이순신','lee@test.com','010-1234-5678','default','서울');");
+        db.execSQL("INSERT INTO Member(id,pass,name,email,phone,profile,addr)\n" +
+                "VALUES('park','1','박지성','park@test.com','010-1234-5678','default','부산');");
+        db.execSQL("INSERT INTO Member(id,pass,name,email,phone,profile,addr)\n" +
+                "VALUES('yoo','1','유비','yoo@test.com','010-1234-5678','default','인천');");
 
+*/
     }
 
     @Override
@@ -54,9 +84,27 @@ public class MemberDAO extends SQLiteOpenHelper{
     public MemberBean findOne(MemberBean bean){
         MemberBean member = new MemberBean();
 
-        String sql=String.format("SELECT id,pass,name,phone,addr,profile " +
+        String sql=String.format("SELECT id,pass,name,email,phone,profile,addr " +
                 "FROM Member WHERE id = '%s'",bean.getId());
         //bean으로 넘어온 값의 ID를 가져온다. ID를 비교해서 하나의 값을 꺼내온다
+
+        Log.d("login SQL:",sql);
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor= db.rawQuery(sql,null);
+        if(cursor.moveToNext()){
+            Log.d("ID결과:",cursor.getString(1));
+            member.setId(cursor.getString(0));
+            member.setPass(cursor.getString(1));
+            member.setName(cursor.getString(2));
+            member.setEmail(cursor.getString(3));
+            member.setPhone(cursor.getString(4));
+            member.setProfile(cursor.getString(5));
+            member.setAddr(cursor.getString(6));
+        } else {
+            member.setId("fail");
+        }
+        Log.d("login result:",member.getId());
+
         return member;
 
     } //  비번이 있어서 보안하는 것임
