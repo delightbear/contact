@@ -78,7 +78,7 @@ public class MemberDAO extends SQLiteOpenHelper{
                 bean.getId(),bean.getPass(),bean.getName(), bean.getEmail(), bean.getPhone()
                 ,bean.getProfile(),bean.getAddr());
 
-        SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase db = this.getWritableDatabase(); //batch하는 애들은 getwritba가져오고 sql하고 끝
         db.execSQL(sql);
         db.close();
 
@@ -112,9 +112,13 @@ public class MemberDAO extends SQLiteOpenHelper{
 
         return member;
 
+        //찾을때는 커서가 등장하고 리턴하고...
+
     } //  비번이 있어서 보안하는 것임
        // 추상을 {}로 바꿨을때 에러가 뜨는건 리턴값이 잇어야 하는데 없어서임
        //  리턴값을 설정해줌 멤버빈은 멤버빈이 리턴하니까 멤버빈을 만들어서 리턴하는 것으로
+
+
 
     //READ SOME
     public ArrayList<MemberBean> findSome(String keyword){

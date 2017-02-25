@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#f9e006</color> <!-- 여기서 일상적으로 쓰는 부분에 대하여 색상 등록하는 곳임  -->
+    <color name="colorPrimaryDark">#f9e006</color>
+    <color name="colorAccent">#f9e006</color>
+    <color name="colorRed">#f91e06</color>
 </resources>

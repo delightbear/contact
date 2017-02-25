@@ -13,6 +13,8 @@ import com.example.hb2013.contactapp.R;
 import com.example.hb2013.contactapp.domain.MemberBean;
 import com.example.hb2013.contactapp.service.MemberService;
 import com.example.hb2013.contactapp.service.MemberServiceImpl;
+import com.example.hb2013.contactapp.util.Phone;
+
 
 public class DetailActivity extends AppCompatActivity implements View.OnClickListener {
     ImageView ivProfile;
@@ -20,8 +22,10 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     Button btCall, btMessge, btMap, btDel, btEdit, btList;
 
 
+
     MemberService service;
     MemberBean member;
+    Phone phone;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -34,6 +38,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_detail);
         service=new MemberServiceImpl(this);
         member = new MemberBean();
+        phone= new Phone(this,this);
         Intent intent =this.getIntent();
         String id=intent.getExtras().getString("id");
         member.setId(id);
@@ -80,8 +85,13 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btCall :
+                phone.directCall(member.getPhone());
+
                 break;
             case R.id.btMessge :
+                Intent smsIntent = new Intent(DetailActivity.this,MessageActivity.class);
+                smsIntent.putExtra("phone",member.getPhone());
+                startActivity(smsIntent);
                 break;
             case R.id.btMap :
                 break;
