@@ -94,6 +94,9 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                 startActivity(smsIntent);
                 break;
             case R.id.btMap :
+                Intent mapintent = new Intent(DetailActivity.this, MapsActivity.class);
+                mapintent.putExtra("addr",member.getAddr());
+                startActivity(mapintent);
                 break;
             case R.id.btDel :
                 break;

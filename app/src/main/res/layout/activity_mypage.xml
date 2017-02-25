@@ -1,124 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
     android:orientation="vertical"
-    android:layout_width="match_parent">
-    <LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:text="마이페이지"
+        android:textSize="30dp"
+        android:gravity="center"/>
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        xmlns:android="http://schemas.android.com/apk/res/android">
         <ImageView
-            android:layout_width="match_parent"
+            android:id="@+id/iv_photo"
+            android:layout_width="wrap_content"
             android:layout_height="100dp" />
     </LinearLayout>
-
-    <LinearLayout
+    <LinearLayout android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp">
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        xmlns:android="http://schemas.android.com/apk/res/android">
         <TextView
-
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="ID"/>
+            android:text="ID : "/>
         <TextView
             android:id="@+id/tvId"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ID"/>
+            />
     </LinearLayout>
-
-    <LinearLayout
+    <LinearLayout android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp">
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        xmlns:android="http://schemas.android.com/apk/res/android">
         <TextView
-
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="이름"/>
+            android:text="PASS : "/>
+        <TextView
+            android:id="@+id/tvPass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+    </LinearLayout>
+    <LinearLayout android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="NAME : "/>
         <TextView
             android:id="@+id/tvName"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="이름"/>
+            />
     </LinearLayout>
-
-    <LinearLayout
+    <LinearLayout android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp">
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        xmlns:android="http://schemas.android.com/apk/res/android">
         <TextView
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="전화"/>
+            android:text="Phone : "/>
         <TextView
             android:id="@+id/tvPhone"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="전화"/>
+            />
     </LinearLayout>
-
-    <LinearLayout
+    <LinearLayout android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp">
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        xmlns:android="http://schemas.android.com/apk/res/android">
         <TextView
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="주소"/>
+            android:text="Address : "/>
         <TextView
             android:id="@+id/tvAddr"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="주소"/>
+            />
     </LinearLayout>
-
-    <LinearLayout
+    <LinearLayout android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        xmlns:android="http://schemas.android.com/apk/res/android">
         <Button
             android:id="@+id/btAlbum"
-            android:layout_width="180dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="앨범"/>
+            android:text="ALBUM"
+            android:textSize="20dp"
+            android:gravity="center"/>
         <Button
-            android:id="@+id/btSche"
-            android:layout_width="180dp"
+            android:id="@+id/btSchedule"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="스케쥴"/>
+            android:text="SCHEDULE"
+            android:textSize="20dp"
+            android:gravity="center"/>
     </LinearLayout>
-
-    <LinearLayout
+    <LinearLayout android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        xmlns:android="http://schemas.android.com/apk/res/android">
         <Button
-            android:id="@+id/btGoogle"
-            android:layout_width="180dp"
+            android:id="@+id/btMyhomepage"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="구글"/>
+            android:text="GOOGLE"
+            android:textSize="20dp"
+            android:gravity="center"/>
         <Button
             android:id="@+id/btNaver"
-            android:layout_width="180dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="네이버"/>
+            android:text="NAVER"
+            android:textSize="20dp"
+            android:gravity="center"/>
     </LinearLayout>
-
-    <LinearLayout
+    <LinearLayout android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+        <Button
+            android:id="@+id/btDelete"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="DELETE"
+            android:textSize="20dp"
+            android:gravity="center"/>
         <Button
             android:id="@+id/btUpdate"
-            android:layout_width="180dp"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="수정"/>
-
+            android:text="UPDATE"
+            android:textSize="20dp"
+            android:gravity="center"/>
         <Button
-            android:id="@+id/btDel"
-            android:layout_width="180dp"
+            android:id="@+id/btUnregist"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="탈퇴"/>
+            android:text="UNREGIST"
+            android:textSize="20dp"
+            android:gravity="center"/>
     </LinearLayout>
-
-
 </LinearLayout>

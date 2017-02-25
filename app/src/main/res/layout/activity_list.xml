@@ -10,4 +10,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"></ListView>
 
+    <Button
+        android:id="@+id/btMypage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="마이페이지"/>
+
 </LinearLayout>

@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.hb2013.contactapp.R;
@@ -19,6 +20,7 @@ import com.example.hb2013.contactapp.util.MemberAdapter;
 import java.util.ArrayList;
 
 public class ListActivity extends AppCompatActivity {
+    Button btMypage;
     MemberService service;
     ListView lvMemberlist;
 
@@ -28,6 +30,7 @@ public class ListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_list);
         service= new MemberServiceImpl(this.getApplicationContext());
         lvMemberlist = (ListView) findViewById(R.id.lvMemberlist);
+        btMypage = (Button) findViewById(R.id.btMypage);
         ArrayList<MemberBean> list = service.list();
         Log.d("리스트에 담긴 값의 수:",String.valueOf(list.size()));
         lvMemberlist.setAdapter(new MemberAdapter(list,this));
@@ -38,6 +41,16 @@ public class ListActivity extends AppCompatActivity {
                 Object o= lvMemberlist.getItemAtPosition(i);
                 MemberBean member = (MemberBean) o;
                 Intent intent = new Intent(ListActivity.this, DetailActivity.class);
+                intent.putExtra("id",member.getId());
+                startActivity(intent);
+            }
+        });
+        btMypage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Object o= lvMemberlist.getItemAtPosition(0);
+                MemberBean member = (MemberBean) o;
+                Intent intent = new Intent(ListActivity.this, MypageActivity.class);
                 intent.putExtra("id",member.getId());
                 startActivity(intent);
             }
